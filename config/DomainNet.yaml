@@ -1,0 +1,40 @@
+---
+DataConfig:
+  dataset: "DomainNet"
+
+ModelConfig:
+  backbone: "resnet50"
+  pretrained: True
+
+TrainingConfig:
+  batch_size: 50
+  # The total data numbers we use in each epoch
+  epoch_samples: 30000
+  total_epochs: 80
+  # We decay learning rate from begin value to end value with cosine annealing schedule
+  learning_rate_begin: 0.01
+  learning_rate_end: 0.0001
+
+# The configuration for our decentralized unsupervised multi-source domain adaptation
+UMDAConfig:
+  # As stated in paper, we gradually increase confidence_gate from low to high
+  confidence_gate_begin: 0.8
+  confidence_gate_end: 0.95
+  # Controlling whether to use the batchnorm_mmd控制是否使用batchnorm_mmd
+  batchnorm_mmd: True
+  # the communication rounds in decentralized training, can be set into [0.2, 0.5 ,1, N]分散训练中的交流轮
+  communication_rounds: 1
+  # the malicious domain with poisoning attack恶意域名带有投毒攻击
+  malicious:
+    attack_domain: "real"
+    # attack_level is a float number stands for the mislabeled ratio m%
+    # Attack_level是一个浮点数，表示错误标记的比率m%
+    attack_level: 0
+
+
+
+
+
+
+
+
